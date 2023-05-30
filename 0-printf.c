@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	}
 
 	va_start(list, format);
-	for (i = 0; format[i] != '\0'; i++)
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
 		if (format[i] != '\0')
 		{
@@ -29,7 +29,6 @@ int _printf(const char *format, ...)
 	}
 	write(1, &buffer[0], j);
 
-	_putchar('\n');
 	va_end(list);
 	return (i);
 }
