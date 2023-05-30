@@ -27,7 +27,14 @@ int _printf(const char *format, ...)
 			buffer[j++] = format[i];
 		}
 	}
-	write(1, &buffer[0], j);
+	if (format[i] == '%')
+	{
+		_putchar('%');
+	}
+	else
+	{
+		write(1, &buffer[0], j);
+	}
 
 	va_end(list);
 	return (i);
