@@ -7,7 +7,7 @@
  * @n: takes int
  * Return: void
  */
-void _prt(int n)
+int _prt(int n)
 {
 	if (n < 0)
 	{
@@ -19,6 +19,7 @@ void _prt(int n)
 		_prt(n / 10);
 	}
 	_putchar(n % 10 + '0');
+	return (0);
 }
 
 /**
@@ -28,8 +29,6 @@ void _prt(int n)
  */
 int print_int(const char *format, ...)
 {
-	int i = 0;
-
 	va_list list;
 
 	va_start(list, format);
@@ -39,15 +38,5 @@ int print_int(const char *format, ...)
 		return (-1);
 	}
 
-	if (format)
-	{
-		while (format[i])
-		{
-			_prt(va_arg(list, int));
-			i++;
-			break;
-		}
-	}
-	va_end(list);
-	return (0);
+	return (_prt(va_arg(list, int)));
 }
