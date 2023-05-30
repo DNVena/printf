@@ -11,8 +11,6 @@
 int _printf(const char *format, ...)
 {
 	int i, j = 0;
-	int k = 0;
-	int l = 0;
 	char buffer[BUFF_SIZE];
 	va_list list;
 
@@ -22,24 +20,22 @@ int _printf(const char *format, ...)
 	}
 
 	va_start(list, format);
-	if (format[l] == '%')
+	for (i = 0; format && format[i] != '\0'; i++)
+	{
+		if (format[i] != '\0')
+		{
+			buffer[j++] = format[i];
+		}
+	}
+	if (format[i] == '%')
 	{
 		_putchar('%');
 		return (1);
 	}
 	else
 	{
-		for (i = 0; format && format[i] != '\0'; i++)
-		{
-			while (format[k])
-			{
-				buffer[j++] = format[i];
-				k++;
-				break;
-			}
-		}
+		write(1, &buffer[0], j);
 	}
-	write(1, &buffer[0], j);
 
 	va_end(list);
 	return (i);
