@@ -25,7 +25,6 @@ int _printf(const char *format, ...)
 				case 'c':
 					c = va_arg(list, int);
 					_putchar(c);
-					_putchar('\n');
 					break;
 				case 's':
 					str = va_arg(list, char *);
@@ -33,12 +32,9 @@ int _printf(const char *format, ...)
 					{
 						_putchar(str[j]);
 					}
-					_putchar('\n');
 					break;
 				case '%':
-					va_arg(list, char *);
 					_putchar('%');
-					_putchar('\n');
 					break;
 				default:
 					i++;
@@ -47,6 +43,7 @@ int _printf(const char *format, ...)
 			i++;
 		}
 	}
+	_putchar('\n');
 	va_end(list);
 	return (0);
 }
