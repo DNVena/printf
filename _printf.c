@@ -10,8 +10,9 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j = 0;
-	char buffer[BUFF_SIZE];
+	int i;
+	char c;
+	char *str;
 	va_list list;
 
 	if (format == NULL)
@@ -20,23 +21,26 @@ int _printf(const char *format, ...)
 	}
 
 	va_start(list, format);
-	for (i = 0; format && format[i] != '\0'; i++)
+	if (format[1] == 'c')
 	{
-		if (format[i] != '\0')
-		{
-			buffer[j++] = format[i];
-		}
+		c = va_arg(list, int);
+		_putchar(c);
+		return (1);
 	}
-	if (format[i] == '%')
+	else if (format[1] == 's')
+	{
+		str = va_arg(list, char *);
+		for (i = 0; str[i] != '\0'; i++)
+		{
+			_putchar(str[i]);
+		}
+		return (i);
+	}
+	else if (format[1] == '%')
 	{
 		_putchar('%');
 		return (1);
 	}
-	else
-	{
-		write(1, &buffer[0], j);
-	}
-
 	va_end(list);
-	return (i);
+	return (0);
 }
