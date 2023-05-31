@@ -19,6 +19,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
+
 	va_start(list, format);
 	if (format[1] == 'c')
 	{
@@ -34,6 +35,10 @@ int _printf(const char *format, ...)
 			_putchar(str[i]);
 		}
 		return (i);
+	}
+	if (format[1] == '%')
+	{
+		_putchar('%');
 	}
 	va_end(list);
 	return (0);
