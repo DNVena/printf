@@ -53,7 +53,7 @@ void _prt(int n)
  * @format: takes pointer
  * Return: integer
  */
-int print_int(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	int i, j = 0, k = 0;
 	int num,  _len, len = 1;
