@@ -11,7 +11,7 @@
 int _printf(const char *format, ...)
 {
 	char c;
-	int i;
+	int i, len;
 	char *str;
 	va_list list;
 
@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 	{
 		c = va_arg(list, int);
 		_putchar(c);
-		return (1);
+		len = 1;
 	}
 	if (format[1] == 's')
 	{
@@ -34,12 +34,13 @@ int _printf(const char *format, ...)
 		{
 			_putchar(str[i]);
 		}
-		return (i);
+		len = i;
 	}
 	if (format[1] == '%')
 	{
 		_putchar('%');
+		len = 1;
 	}
 	va_end(list);
-	return (0);
+	return (len);
 }
