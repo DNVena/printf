@@ -11,35 +11,40 @@
 int _printf(const char *format, ...)
 {
 	char c;
-	int i, len;
+	int i, j = 0, m, k = 0, len;
 	char *str;
+	char buffer[BUFF_SIZE];
 	va_list list;
 
-	if (format == NULL)
-	{
-		return (-1);
-	}
-
 	va_start(list, format);
-	if (format[1] == 'c')
+	for (i = 0; format && format[i] != '\0'; i++)
+	{
+		while (format[k])
+		{
+			buffer[j++] = format[i];
+			k++;
+			break;
+		}
+	}
+	if (buffer[0] == '%' && buffer[1] == 'c')
 	{
 		c = va_arg(list, int);
 		_putchar(c);
 		len = 1;
 	}
-	if (format[1] == 's')
+	else if (buffer[0] == '%' && buffer[1] == 's')
 	{
 		str = va_arg(list, char *);
-		for (i = 0; str[i] != '\0'; i++)
+		for (m = 0; str[m] != '\0'; m++)
 		{
-			_putchar(str[i]);
+			_putchar(str[m]);
 		}
-		len = i;
+		len = m;
 	}
-	if (format[1] == '%')
+	else
 	{
-		_putchar('%');
-		len = 1;
+		write(1, &buffer[0], j);
+		len = j;
 	}
 	va_end(list);
 	return (len);
